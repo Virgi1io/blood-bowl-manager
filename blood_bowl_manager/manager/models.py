@@ -1,8 +1,10 @@
 from django.db import models
 
-class User(models.Model):
+class Coach(models.Model):
     name = models.CharField(max_length=200)
     creation_date = models.DateTimeField(auto_now_add=True)
+    def __unicode__(self):
+        return self.name
 
 class Race(models.Model):
     name = models.CharField(max_length=200)
@@ -10,11 +12,13 @@ class Race(models.Model):
     assistant_coach_cost = models.IntegerField()
     reroll_cost = models.IntegerField()
     apothecary_cost = models.IntegerField()
+    def __unicode__(self):
+        return self.name
 
 class Team(models.Model):
     name = models.CharField(max_length=200)
     creation_date = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(Coach)
     race = models.ForeignKey(Race)
     treasury = models.IntegerField()
     rerolls = models.IntegerField()
@@ -22,6 +26,8 @@ class Team(models.Model):
     assistant_coachs = models.IntegerField()
     cheerleaders = models.IntegerField()
     apothecary = models.IntegerField()
+    def __unicode__(self):
+        return self.name
 
 class PlayerStats(models.Model):
     MA = models.IntegerField('Movement Allowance')
@@ -30,13 +36,17 @@ class PlayerStats(models.Model):
     AV = models.IntegerField('Armor Value')
 
 class SkillCategory(models.Model):
-    tilte = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     initial = models.CharField(max_length=1)
+    def __unicode__(self):
+        return self.title 
 
 class Skill(models.Model):
     title = models.CharField(max_length=200)
     category = models.ForeignKey(SkillCategory)
     description = models.TextField()
+    def __unicode__(self):
+        return self.title
 
 class PlayerSkills(models.Model):
     skills = models.ManyToManyField(Skill, related_name='+')
@@ -50,6 +60,8 @@ class PlayerType(models.Model):
     initial_skills = models.ForeignKey(PlayerSkills)
     max_count = models.IntegerField()
     cost = models.IntegerField()
+    def __unicode__(self):
+        return self.title
 
 class Player(models.Model):
     team = models.ForeignKey(Team)
@@ -58,3 +70,5 @@ class Player(models.Model):
     stats = models.ForeignKey(PlayerStats)
     skills = models.ForeignKey(PlayerSkills)
     value = models.IntegerField()
+    def __unicode__(self):
+        return self.name
