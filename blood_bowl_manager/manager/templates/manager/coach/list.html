@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Coach List</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <h1>List of all coaches</h1>
+    {% if coach_list %}
+    <ul class="coach_list list">
+      {% for coach in coach_list %}
+      <li class="coach_list_item coach">{{ coach.name }}</li>
+    </ul>
+      {% endfor %}
+    {% else %}
+    <p class="error">There are no coaches.</p>
+    {% endif %}
+  </body>
+</html>
