@@ -8,7 +8,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'blood_bowl_manager.views.home', name='home'),
+    url(r'^$', 'blood_bowl_manager.views.home', name='home'),
     # url(r'^blood_bowl_manager/', include('blood_bowl_manager.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
