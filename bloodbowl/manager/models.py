@@ -1,10 +1,17 @@
 from django.db import models
 
+
 class Coach(models.Model):
     name = models.CharField(max_length=100)
     creation_date = models.DateTimeField(auto_now_add=True)
+
     def __unicode__(self):
         return self.name
+
+    def to_json(self):
+        return dict(name=self.name,
+                    creation_date=self.creation_date.isoformat())
+
 
 class Race(models.Model):
     name = models.CharField(max_length=30)
@@ -12,8 +19,16 @@ class Race(models.Model):
     assistant_coach_cost = models.IntegerField()
     reroll_cost = models.IntegerField()
     apothecary_cost = models.IntegerField()
+
     def __unicode__(self):
         return self.name
+
+    def to_json(self):
+        return dict(name=self.name,
+                    cheerleader_cost=self.cheerleader_cost,
+                    assistant_coach_cost=self.assistant_coach_cost,
+                    reroll_cost=self.reroll_cost,
+                    apothecary_cost=self.apothecary_cost)
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
@@ -26,8 +41,10 @@ class Team(models.Model):
     assistant_coachs = models.IntegerField()
     cheerleaders = models.IntegerField()
     apothecary = models.IntegerField()
+
     def __unicode__(self):
         return self.name
+
 
 class PlayerStats(models.Model):
     MA = models.IntegerField('Movement Allowance')
