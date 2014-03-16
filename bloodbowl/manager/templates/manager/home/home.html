@@ -2,13 +2,13 @@
 <html>
   <head>
     <meta name="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Blood Bowl Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="{{ STATIC_URL }}/script/manager.js"></script>
+    <title>Blood Bowl Manager</title>
   </head>
   <body>
-    <h1>Blood Bowl Manager</h1>
-    <ul class="list">
-      <li class="list_item"><a href="coaches/">Coaches</a></li>
-    </ul>
+  <body onload="main();">
+    <div id="manager"></div>
   </body>
 </html>
