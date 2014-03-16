@@ -1,8 +1,19 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.utils import simplejson
 from manager.models import Coach
+import json
+
+class JsonResponse(HttpResponse):
+    def __init__(self,
+                 content={}, 
+                 mimetype=None,
+                 status=None,
+                 content_type='application/json'):
+        super(JsonResponse, self).__init__(json.dumps(content),
+                                           mimetype=mimetype,
+                                           status=status,
+                                           content_type=content_type)
 
 def home(request):
     return render_to_response('manager/home/home.html', RequestContext(request))
@@ -13,5 +24,7 @@ def coach_page(request):
 
 def coach_list(request):
     coach_list = Coach.objects.all().order_by('-name')
-    result = [obj.to_json() for obj in coach_list]
-    return HttpResponse(simplejson.dumps(result), mimetype="application/json")
+    result = {}
+    result['coach_list'] = [obj.to_json() for obj in coach_list]
+    return JsonResponse(result, mimetype="application/json")
+

@@ -1,7 +1,11 @@
-html {
-    font-family: Arial;
-    color: black;
-    background-color: #90EE90;
+body {
+  padding-top: 50px;
+}
+
+
+.menu {
+  padding: 40px 15px;
+  text-align: center;
 }
 
 .list {
